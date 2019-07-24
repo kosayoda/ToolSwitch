@@ -30,6 +30,7 @@ public class EventRegister {
 	public static void onSendChat(ClientChatEvent event) {
 		String message = event.getMessage().toLowerCase();
 		if(message.equals("/toolswitch-toggle")) {
+			event.setCanceled(true);
 			if(toggle) {
 				toggle = false;
 				mc.player.sendMessage(new StringTextComponent("§4ToolSwitch Disabled!"));
@@ -41,6 +42,7 @@ public class EventRegister {
 		}
 		
 		if(message.contains("/toolswitch-set silk ")) {
+			event.setCanceled(true);
 			if(message.substring(21).equals("1") || message.substring(21).equals("2") || message.substring(21).equals("3") || message.substring(21).equals("4") || message.substring(21).equals("5") || message.substring(21).equals("6") || message.substring(21).equals("7") || message.substring(21).equals("8") || message.substring(21).equals("9")) {
 				silk = Integer.parseInt(message.substring(21))-1;
 				mc.player.sendMessage(new StringTextComponent("§4Silk pickaxe slot set to slot #" + (silk+1) + "!"));
@@ -48,6 +50,7 @@ public class EventRegister {
 		}
 		
 		if(message.contains("/toolswitch-set fortune ")) {
+			event.setCanceled(true);
 			if(message.substring(24).equals("1") || message.substring(24).equals("2") || message.substring(24).equals("3") || message.substring(24).equals("4") || message.substring(24).equals("5") || message.substring(24).equals("6") || message.substring(24).equals("7") || message.substring(24).equals("8") || message.substring(24).equals("9")) {
 				fortune = Integer.parseInt(message.substring(24))-1;
 				mc.player.sendMessage(new StringTextComponent("§4Fortune pickaxe slot set to slot #" + (fortune+1) + "!"));
@@ -55,6 +58,7 @@ public class EventRegister {
 		}
 		
 		if(message.contains("/toolswitch-set shovel ")) {
+			event.setCanceled(true);
 			if(message.substring(23).equals("1") || message.substring(23).equals("2") || message.substring(23).equals("3") || message.substring(23).equals("4") || message.substring(23).equals("5") || message.substring(23).equals("6") || message.substring(23).equals("7") || message.substring(23).equals("8") || message.substring(23).equals("9")) {
 				shovel = Integer.parseInt(message.substring(23))-1;
 				mc.player.sendMessage(new StringTextComponent("§4Shovel slot set to slot #" + (shovel+1) + "!"));
