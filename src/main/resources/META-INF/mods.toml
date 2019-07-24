@@ -14,7 +14,7 @@ authors="zr2002" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
 
-idk
+Switch between tools automatically.
 
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
