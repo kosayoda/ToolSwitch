@@ -1,5 +1,8 @@
 package zr2002.toolswitch;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
@@ -19,6 +22,9 @@ public class EventRegister {
 	private static int silk = 0;
 	private static int shovel = 1;
 	private static Minecraft mc = Minecraft.getInstance();
+	private static boolean isFluid;
+	private static String currentFluid;
+	private static final Logger logger = LogManager.getLogger();
 	
 	public EventRegister() {
 		
@@ -73,14 +79,26 @@ public class EventRegister {
 	public static void onHighlight(DrawBlockHighlightEvent event) {
 		
 		
-		RayTraceResult ray = Minecraft.getInstance().getRenderViewEntity().func_213324_a(20.0D, 0.0F, false);
+		RayTraceResult ray = Minecraft.getInstance().getRenderViewEntity().func_213324_a(6.0D, 0.0F, false);
+		RayTraceResult fluid = Minecraft.getInstance().getRenderViewEntity().func_213324_a(6.0D, 0.0F, true);
+		if(fluid.getType() == RayTraceResult.Type.BLOCK) {
+			BlockPos fluidpos = ((BlockRayTraceResult)fluid).getPos();
+			BlockState fluidstate = Minecraft.getInstance().world.getBlockState(fluidpos);
+			currentFluid = String.valueOf((Object)Registry.BLOCK.getKey(fluidstate.getBlock()));
+			if(currentFluid.contains("water") || currentFluid.contains("lava")) {
+				isFluid = true;
+			}
+			else isFluid = false;
+		}
+		
+		
 		
 		  if (ray.getType() == RayTraceResult.Type.BLOCK) {
 	            BlockPos blockpos = ((BlockRayTraceResult)ray).getPos();
 	            BlockState blockstate = Minecraft.getInstance().world.getBlockState(blockpos);
 	            
 	            currentBlock = String.valueOf((Object)Registry.BLOCK.getKey(blockstate.getBlock()));
-	            
+	            if(!isFluid) {
 	            	if(currentBlock.contains("stone") && toggle) {
 	            	Minecraft.getInstance().player.inventory.currentItem = silk;
 	            	}
@@ -148,7 +166,7 @@ public class EventRegister {
 		            	Minecraft.getInstance().player.inventory.currentItem = shovel;
 		            	}
 	            	
-	            
+	            }
 	            
 	}
 	
