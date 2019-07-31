@@ -138,6 +138,9 @@ public class EventRegister {
 	            	if(currentBlock.contains("redstone") && toggle) {
 		            	Minecraft.getInstance().player.inventory.currentItem = fortune;
 		            	}
+	            	if(currentBlock.contains("emerald") && toggle) {
+		            	Minecraft.getInstance().player.inventory.currentItem = fortune;
+		            	}
 	            	if(currentBlock.contains("lapis") && toggle) {
 		            	Minecraft.getInstance().player.inventory.currentItem = fortune;
 		            	}
