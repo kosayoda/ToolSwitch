@@ -1,4 +1,4 @@
-package zr2002.toolswitch;
+package com.zr2002.ToolSwitch;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
