@@ -23,6 +23,7 @@ public class EventRegister {
 	private static int shovel = 1;
 	private static int axe = 2;
 	private static int shears = 3;
+	private static int msword = 4;
 	private static Minecraft mc = Minecraft.getInstance();
 	private static boolean isFluid;
 	private static String currentFluid;
@@ -76,7 +77,7 @@ public class EventRegister {
 		if(message.contains("/toolswitch-set axe ")) {
 			event.setCanceled(true);
 			if(message.substring(20).equals("1") || message.substring(20).equals("2") || message.substring(20).equals("3") || message.substring(20).equals("4") || message.substring(20).equals("5") || message.substring(20).equals("6") || message.substring(20).equals("7") || message.substring(20).equals("8") || message.substring(20).equals("9")) {
-				shovel = Integer.parseInt(message.substring(20))-1;
+				axe = Integer.parseInt(message.substring(20))-1;
 				mc.player.sendMessage(new StringTextComponent("§4Axe slot set to slot #" + (axe+1) + "!"));
 			
 			}
@@ -86,8 +87,16 @@ public class EventRegister {
 		if(message.contains("/toolswitch-set shears ")) {
 			event.setCanceled(true);
 			if(message.substring(23).equals("1") || message.substring(23).equals("2") || message.substring(23).equals("3") || message.substring(23).equals("4") || message.substring(23).equals("5") || message.substring(23).equals("6") || message.substring(23).equals("7") || message.substring(23).equals("8") || message.substring(23).equals("9")) {
-				axe = Integer.parseInt(message.substring(23))-1;
+				shears = Integer.parseInt(message.substring(23))-1;
 				mc.player.sendMessage(new StringTextComponent("§4Shears slot set to slot #" + (shears+1) + "!"));
+			}
+		}
+		
+		if(message.contains("/toolswitch-set msword ")) {
+			event.setCanceled(true);
+			if(message.substring(23).equals("1") || message.substring(23).equals("2") || message.substring(23).equals("3") || message.substring(23).equals("4") || message.substring(23).equals("5") || message.substring(23).equals("6") || message.substring(23).equals("7") || message.substring(23).equals("8") || message.substring(23).equals("9")) {
+				msword = Integer.parseInt(message.substring(23))-1;
+				mc.player.sendMessage(new StringTextComponent("§4Melon Sword slot set to slot #" + (msword+1) + "!"));
 			}
 		}
 		
@@ -207,6 +216,10 @@ public class EventRegister {
 	            	}
 	            	if(currentBlock.contains("wool") && toggle) {
 	            		Minecraft.getInstance().player.inventory.currentItem = shears;
+	            	}
+	            	
+	            	if(currentBlock.contains("melon") && toggle) {
+	            		Minecraft.getInstance().player.inventory.currentItem = msword;
 	            	}
 	            	
 	            }
