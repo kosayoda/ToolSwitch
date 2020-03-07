@@ -5,13 +5,17 @@ import org.apache.logging.log4j.Logger;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.overlay.DebugOverlayGui;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.ClientChatEvent;
 import net.minecraftforge.client.event.DrawHighlightEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class EventRegister {
@@ -24,6 +28,7 @@ public class EventRegister {
 	private static int axe = 2;
 	private static int shears = 3;
 	private static int msword = 4;
+	private static int sword = 5;
 	private static Minecraft mc = Minecraft.getInstance();
 	private static boolean isFluid;
 	private static String currentFluid;
@@ -100,6 +105,18 @@ public class EventRegister {
 			}
 		}
 		
+		
+	}
+	
+	@SubscribeEvent
+	
+	public static void onTick(TickEvent.ClientTickEvent event) {
+		
+		Entity entity = Minecraft.getInstance().pointedEntity;
+		if(entity != null && toggle) {
+		mc.player.inventory.currentItem = sword;
+		}
+		
 	}
 	
 	@SubscribeEvent
@@ -108,6 +125,7 @@ public class EventRegister {
 		
 		RayTraceResult ray = Minecraft.getInstance().getRenderViewEntity().func_213324_a(6.0D, 0.0F, false);
 		RayTraceResult fluid = Minecraft.getInstance().getRenderViewEntity().func_213324_a(6.0D, 0.0F, true);
+		
 		if(fluid.getType() == RayTraceResult.Type.BLOCK) {
 			BlockPos fluidpos = ((BlockRayTraceResult)fluid).getPos();
 			BlockState fluidstate = Minecraft.getInstance().world.getBlockState(fluidpos);
